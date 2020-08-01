@@ -71,52 +71,78 @@ const server = http.createServer((req, res) => {
 	} 
 	else if (req.method === 'POST' && req.url == '/update') {
 		collectPostData(req, result => {
-			const { name, content } = result;
+			const { name, content, folder } = result;
 
 			// Update file
 			try {
         if (!name.length || !content.length) {
-					res.end(`File name or note content cannot be empty.`);
+					res.end(`File name or content cannot be empty.`);
         }
-				else if (fs.existsSync(`./notes/${name}.txt`)) {
-					fs.writeFile(`./notes/${name}.txt`, content, (err) => {
+        else if (!folder.length) {
+					res.end(`Folder name cannot be empty.`);
+        }
+				else if (fs.existsSync(`./${folder}/${name}.txt`)) {
+					fs.writeFile(`./${folder}/${name}.txt`, content, (err) => {
 						if (err) {
 							res.end(err);
 						}
 						else {
-							res.end(`Updated ${name}.txt file successfully.`);
+							res.end(`Updated ./${folder}/${name}.txt successfully.`);
 						}
 					});
 				} 
 				else {
-					res.end(`The file you're trying to update ${name}.txt does not exist. Create the file and try again!`);
+					res.end(`./${folder}/${name}.txt does not exist.`);
 				}
 			} 
 			catch (err) {
 				console.error(err);
+        res.end(`Ooops! Something went wrong.`);
 			}
 		})
 	}
 	else if (req.method === 'POST' && req.url == '/delete') {
 		collectPostData(req, result => {
-      const { name } = result;
+      const { name, folder } = result;
       if (!name.length) {
         res.end(`File name cannot be empty.`);
       }
-
+      else if (!folder.length) {
+        res.end(`Folder name cannot be empty.`);
+      }
 			// Delete file
-			fs.unlink(`./notes/${name}.txt`, function (err) {
+			fs.unlink(`./${folder}/${name}.txt`, function (err) {
 				if (err) {
-					res.end(`File you want to delete does not exist.`);
+					res.end(`File you want to delete does not exist in ./default`);
 				}
 				else {
 					res.end(`Deleted ${name}.txt file successfully.`);
 				}
 			});
 		})
-	}
+  }
+  else if (req.method === 'POST' && req.url == '/read') {
+    collectPostData(req, result => {
+      const { name, folder } = result;
+
+      if (!folder.length || !name.length) {
+        res.end(`Folder and file names cannot be empty.`);
+      }
+      else if (!fs.existsSync(`./${folder}/${name}.txt`)) {
+        res.end(`./${folder}/${name}.txt does not exist.`);
+      }
+      else {
+        fs.readFile(`./${folder}/${name}.txt`, `utf8`, function (err,data) {
+          if (err) {
+            res.end(err);
+          }
+          res.end(`${data}`);
+        });
+      }
+    });
+  }
 	else {
-		res.end(`Ooops! Kindly check doc on how to use our endpoints`);
+		res.end(`Ooops! Something went wrong.`);
 	}
 });
 
