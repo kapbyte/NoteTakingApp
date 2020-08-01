@@ -5,29 +5,62 @@ const fs = require('fs');
 const server = http.createServer((req, res) => {
 	if (req.method === 'POST' && req.url == '/create') {
 		collectPostData(req, result => {
-      //user must enter a name to create a file else return "enter a flie name"
-      //Implement folder to save .txt file or save .txt file to ./default
-      // check if folder exist, if true check if file exist if true, then you cant create again, else create folder or file
-      // if no folder name create file in ./default
-      const { name, content } = result;
+      const { name, content, folder } = result;
 			
 			try {
         if (!name.length || !content.length) {
 					res.end(`File name or note content cannot be empty.`);
         }
-				else if (fs.existsSync(`./notes/${name}.txt`)) {
-					res.end(`File already exist, try using another name.`);
+        else if (!folder.length) {
+          if (fs.existsSync(`./default/${name}.txt`)) {
+            res.end(`./default/${name}.txt already exist, try using another file name.`);
+          } 
+          else {
+            // Create new file to ./default 
+            fs.writeFile(`./default/${name}.txt`, content, (err) => {
+              if (err) {
+                res.end(err);
+              }
+              else {
+                res.end(`Successfully created ${name}.txt file in ./default`);
+              }
+            });
+          }
+        }
+				else if (fs.existsSync(`./${folder}`) && !fs.existsSync(`./${folder}/${name}.txt`)) {
+          // Create new file to ./${folder} 
+          fs.writeFile(`./${folder}/${name}.txt`, content, (err) => {
+            if (err) {
+              res.end(err);
+            }
+            else {
+              res.end(`Successfully created ./${folder}/${name}.txt`);
+            }
+          });
 				} 
 				else {
-					// Create new file to ./notes 
-					fs.writeFile(`./notes/${name}.txt`, content, (err) => {
-						if (err) {
-							res.end(err);
-						}
-						else {
-							res.end(`Successfully created ${name}.txt file.`);
-						}
-					});
+          // Check if file exist in the ./${folder}
+          if (fs.existsSync(`./${folder}/${name}.txt`)) {
+            res.end(`./${folder}/${name}.txt already exist, try using another file name.`);
+          }
+          else {
+            fs.mkdir(`${folder}`, (err) => {
+              if (err) {
+                res.end(err);
+              }
+              else {
+                // Create new file to ./${folder} 
+                fs.writeFile(`./${folder}/${name}.txt`, content, (err) => {
+                  if (err) {
+                    res.end(err);
+                  }
+                  else {
+                    res.end(`Successfully created ./${folder}/${name}.txt directory.`);
+                  }
+                });
+              }
+            });
+          }
 				}
 			} 
 			catch (err) {
