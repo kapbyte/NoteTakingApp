@@ -69,7 +69,7 @@ const server = http.createServer((req, res) => {
 			}
 		});
 	} 
-	else if (req.method === 'POST' && req.url == '/update') {
+	else if (req.method === 'PUT' && req.url == '/update') {
 		collectPostData(req, result => {
 			const { name, content, folder } = result;
 
@@ -100,8 +100,9 @@ const server = http.createServer((req, res) => {
         res.end(`Ooops! Something went wrong.`);
 			}
 		})
-	}
-	else if (req.method === 'POST' && req.url == '/delete') {
+  }
+  // delete api
+	else if (req.method === 'DELETE' && req.url == '/delete') {
 		collectPostData(req, result => {
       const { name, folder } = result;
       if (!name.length) {
@@ -121,7 +122,8 @@ const server = http.createServer((req, res) => {
 			});
 		})
   }
-  else if (req.method === 'POST' && req.url == '/read') {
+  // read api
+  else if (req.method === 'GET' && req.url == '/read') {
     collectPostData(req, result => {
       const { name, folder } = result;
 
