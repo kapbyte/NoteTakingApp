@@ -18,21 +18,25 @@ https://github.com/ke1echi/NoteApp.git
 | http://localhost:3000   | /create     | /read     | /update     | /delete |
 
 **http://localhost:3000/create**
+```
 {
   "name"    : "JavaScript",
   "content" : "JavaScript often abbreviated as JS, is a programming language that conforms to the ECMAScript specification.",
   "folder"  : "programming"
 }
 ```
+```
 /create => creates ./folder/name.txt if folder is provided else ./default/name.txt
 ```
 ![Recordit GIF](http://g.recordit.co/WORni8bQKa.gif)
 
-
+**http://localhost:3000/read**
+```
 {
   "name"    : "JavaScript",
   "folder"  : "programming"
 }
+```
 
 ```
 /read => reads content of ./folder/name.txt if it exists else returns an error message
