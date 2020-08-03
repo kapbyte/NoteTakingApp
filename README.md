@@ -27,7 +27,7 @@ https://github.com/ke1echi/NoteApp.git
 }
 ```
 ```
-/create => Creates ./folder/name.txt if folder is provided else ./default/name.txt
+http://localhost:3000/create => Creates ./folder/name.txt if folder is provided else ./default/name.txt
 ```
 ![Recordit GIF](http://g.recordit.co/WORni8bQKa.gif)
 
@@ -37,7 +37,7 @@ http://localhost:3000/?name=JavaScript&folder=programming
 ```
 
 ```
-/read => Reads content of ./folder/name.txt if it exists else returns an error message
+http://localhost:3000/read => Reads content of ./folder/name.txt if it exists else returns an error message
 ```
 ![Recordit GIF](http://g.recordit.co/PLFn33dbd0.gif)
 
