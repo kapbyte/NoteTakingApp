@@ -14,10 +14,27 @@ https://github.com/ke1echi/NoteApp.git
 
 | HTTP METHOD             | POST        | GET       | PUT         | DELETE  |
 | ------------------------| ------------| --------- | ----------- | ------  |
-| CRUD OP                 | CREATE      | READ      | UPDATE      | DELETE  |
+| OPERATION               | CREATE      | READ      | UPDATE      | DELETE  |
 | http://localhost:3000   | /create     | /read     | /update     | /delete |
 
+**http://localhost:3000/create**
+{
+  "name"    : "JavaScript",
+  "content" : "JavaScript often abbreviated as JS, is a programming language that conforms to the ECMAScript specification.",
+  "folder"  : "programming"
+}
+```
+/create => creates ./folder/name.txt if folder is provided else ./default/name.txt
+```
+![Recordit GIF](http://g.recordit.co/WORni8bQKa.gif)
 
-**Recordit**
 
-![Recordit GIF](http://g.recordit.co/KuC0j6iWhi.gif)
+{
+  "name"    : "JavaScript",
+  "folder"  : "programming"
+}
+
+```
+/read => reads content of ./folder/name.txt if it exists else returns an error message
+```
+![Recordit GIF](http://g.recordit.co/PLFn33dbd0.gif)

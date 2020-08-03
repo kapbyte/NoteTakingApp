@@ -23,7 +23,7 @@ const server = http.createServer((req, res) => {
                 res.end(err);
               }
               else {
-                res.end(`Successfully created ${name}.txt file in ./default`);
+                res.end(`Successfully created ./default/${name}.txt`);
               }
             });
           }
