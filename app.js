@@ -63,11 +63,12 @@ const server = http.createServer((req, res) => {
             });
           }
         }
-      } catch (err) {
-          console.error(err);
-          res.end(`Ooops! Something went wrong.`);
-			  }
-      });
+      }
+      catch (err) {
+        console.error(err);
+        res.end(`Ooops! Something went wrong.`);
+			}
+    });
   }
   else if (req.method === 'PUT' && req.url == '/update') {
     collectPostData(req, result => {
