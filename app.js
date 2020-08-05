@@ -4,18 +4,18 @@ const fs = require('fs');
 const url = require('url');
 
 const server = http.createServer((req, res) => {
-	if (req.method === 'POST' && req.url == '/create') {
-		collectPostData(req, result => {
+  if (req.method === 'POST' && req.url == '/create') {
+    collectPostData(req, result => {
       const { name, content, folder } = result;
-			
-			try {
+      
+      try {
         if (!name.length || !content.length) {
-					res.end(`File name or note content cannot be empty.`);
+          res.end(`File name or note content cannot be empty.`);
         }
         else if (!folder.length) {
           if (fs.existsSync(`./default/${name}.txt`)) {
             res.end(`./default/${name}.txt already exist, try using another file name.`);
-          } 
+          }
           else {
             // Create new file to ./default 
             fs.writeFile(`./default/${name}.txt`, content, (err) => {
@@ -28,7 +28,7 @@ const server = http.createServer((req, res) => {
             });
           }
         }
-				else if (fs.existsSync(`./${folder}`) && !fs.existsSync(`./${folder}/${name}.txt`)) {
+        else if (fs.existsSync(`./${folder}`) && !fs.existsSync(`./${folder}/${name}.txt`)) {
           // Create new file to ./${folder} 
           fs.writeFile(`./${folder}/${name}.txt`, content, (err) => {
             if (err) {
@@ -38,8 +38,8 @@ const server = http.createServer((req, res) => {
               res.end(`Successfully created ./${folder}/${name}.txt`);
             }
           });
-				} 
-				else {
+        }
+        else {
           // Check if file exist in the ./${folder}
           if (fs.existsSync(`./${folder}/${name}.txt`)) {
             res.end(`./${folder}/${name}.txt already exist, try using another file name.`);
@@ -69,8 +69,8 @@ const server = http.createServer((req, res) => {
         res.end(`Ooops! Something went wrong.`);
 			}
 		});
-	} 
-	else if (req.method === 'PUT' && req.url == '/update') {
+  }
+  else if (req.method === 'PUT' && req.url == '/update') {
 		collectPostData(req, result => {
 			const { name, content, folder } = result;
 
@@ -105,7 +105,7 @@ const server = http.createServer((req, res) => {
 		})
   }
   // delete api
-	else if (req.method === 'DELETE' && req.url == '/delete') {
+  else if (req.method === 'DELETE' && req.url == '/delete') {
 		collectPostData(req, result => {
       const { name, folder } = result;
       if (!name.length || !folder.length) {
