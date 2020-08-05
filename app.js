@@ -4,6 +4,7 @@ const fs = require('fs');
 const url = require('url');
 
 const server = http.createServer((req, res) => {
+  // create new file
   if (req.method === 'POST' && req.url == '/create') {
     collectPostData(req, result => {
       const { name, content, folder } = result;
@@ -70,7 +71,7 @@ const server = http.createServer((req, res) => {
     });
   }
 
-  // Update file
+  // update file
   else if (req.method === 'PUT' && req.url == '/update') {
     collectPostData(req, result => {
       const { name, content, folder } = result;
