@@ -118,12 +118,8 @@ const server = http.createServer((req, res) => {
         }
         else {
           fs.unlink(`./${folder}/${name}.txt`, function (err) {
-            if (err) {
-              res.end(err);
-            }
-            else {
-              res.end(`Deleted ${name}.txt file successfully.`);
-            }
+            if (err) res.end(err);
+            res.end(`Deleted ${name}.txt file successfully.`);
           });
         }
 		  });
