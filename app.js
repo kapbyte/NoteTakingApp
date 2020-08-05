@@ -66,9 +66,11 @@ const server = http.createServer((req, res) => {
       } catch (err) {
         console.error(err);
         res.end(`Ooops! Something went wrong.`);
-			}
+      }
     });
   }
+
+  // Update file
   else if (req.method === 'PUT' && req.url == '/update') {
     collectPostData(req, result => {
       const { name, content, folder } = result;
