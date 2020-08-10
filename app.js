@@ -1,7 +1,6 @@
 const http = require('http');
 const { parse } = require('querystring');
 const fs = require('fs');
-const url = require('url');
 
 
 const server = http.createServer((req, res) => {
@@ -226,7 +225,7 @@ const server = http.createServer((req, res) => {
     
       <script>
         const form = document.querySelector('form');
-    
+
         form['submit'].onclick = function (e){
           e.preventDefault();
           const name = form['name'].value;
@@ -245,7 +244,7 @@ const server = http.createServer((req, res) => {
             },
             body  : urlencoded,
           }).then(res =>{
-            res.text().then(result => console.log(result))
+            res.text().then(result => alert(result))
           })
         }
 
@@ -266,7 +265,7 @@ const server = http.createServer((req, res) => {
             },
             body  : urlencoded,
           }).then(res =>{
-            res.text().then(result => console.log(result))
+            res.text().then(result => alert(result))
           })
         }
 
@@ -288,7 +287,7 @@ const server = http.createServer((req, res) => {
             },
             body  : urlencoded,
           }).then(res =>{
-            res.text().then(result => console.log(result))
+            res.text().then(result => alert(result))
           })
         }
 
