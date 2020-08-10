@@ -6,7 +6,6 @@ const fs = require('fs');
 const server = http.createServer((req, res) => {
   if (req.method === 'POST' && req.url == '/create') {
     collectPostData(req, result => {
-      console.log(result)
       const { name, content, folder } = result;
       
       try {
@@ -65,7 +64,6 @@ const server = http.createServer((req, res) => {
           }
         }
       } catch (err) {
-        console.error(err);
         res.end(`Ooops! Something went wrong.`);
       }
     });
@@ -100,7 +98,6 @@ const server = http.createServer((req, res) => {
           res.end(`./${folder}/${name}.txt does not exist.`);
         }
       } catch (err) {
-        console.error(err);
         res.end(`Ooops! Something went wrong.`);
       }
     });
@@ -110,6 +107,7 @@ const server = http.createServer((req, res) => {
   else if (req.method === 'DELETE' && req.url == '/delete') {
     collectPostData(req, result => {
       const { name, folder } = result;
+
       if (!name.length || !folder.length) {
         res.end(`Folder or file name cannot be empty.`);
       }
@@ -181,6 +179,7 @@ const server = http.createServer((req, res) => {
   else if (req.method === 'POST' && req.url ==='/read') {
     collectPostData(req, result => {
       const { name, folder } = result;
+
       if (!folder.length || !name.length) {
         res.end(`Folder or file name cannot be empty.`);
       }
@@ -334,4 +333,4 @@ function collectPostData(request, callback) {
 }
 
 // Listen on port 3000, IP defaults to 127.0.0.1
-server.listen(3000);
+server.listen(process.env.PORT || 3000);
