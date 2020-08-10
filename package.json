@@ -1,0 +1,12 @@
+{
+  "name": "note-taking-app",
+	"author": "Kelechi Chinaka",
+	"version": "0.0.1",
+	"description": "Bring all your activities to your note app.",
+	"main": "app.js",
+	"scripts": {
+		"start": "app.js"
+	},
+  "keywords": [],
+  "license": "ISC"
+}
