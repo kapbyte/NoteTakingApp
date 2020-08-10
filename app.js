@@ -216,10 +216,10 @@ const server = http.createServer((req, res) => {
         <input type="text" id="content" name="content"><br><br>
         <label for="folder">Folder:</label>
         <input type="text" id="folder" name="folder"><br><br>
-        <input type="submit" value="Submit" name="submit">
+        <input type="submit" value="Create" name="submit">
+        <input type="submit" value="Read Note" name="read">
         <input type="submit" value="Update" name="update">
         <input type="submit" value="Delete" name="delete">
-        <input type="submit" value="Read Note" name="read">
       </form>
     
       <script>
