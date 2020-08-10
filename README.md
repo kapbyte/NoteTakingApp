@@ -33,10 +33,10 @@ http://localhost:3000/create => Creates ./folder/name.txt if folder is provided 
 
 
 ```
-http://localhost:3000/?name=JavaScript&folder=programming.
+http://localhost:3000/read.
 Reads content of ./folder/name.txt if it exists else returns an error message
 ```
-![Recordit GIF](http://g.recordit.co/cH282IbOlt.gif)
+![Recordit GIF](http://g.recordit.co/s4wpkmXU8U.gif)
 
 
 **http://localhost:3000/update**
